@@ -65,8 +65,8 @@ const CardList = () => {
     // Fetch cards immediately on mount
     fetchCards()
 
-    // Set up polling interval (every 10 seconds)
-    const intervalId = setInterval(fetchCards, 10000)
+    // Set up polling interval (every 2 seconds)
+    const intervalId = setInterval(fetchCards, 2)
 
     // Clean up interval on unmount
     return () => clearInterval(intervalId)
