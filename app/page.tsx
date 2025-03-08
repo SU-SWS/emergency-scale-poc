@@ -1,9 +1,7 @@
 import CardList from "@/components/CardList";
 import { getCards } from "./api/cards/route";
 
-export const config = {
-  revalidate: 3600,
-}
+export const revalidate = 3600;
 
 export default async function Home() {
   const cards = await getCards();
