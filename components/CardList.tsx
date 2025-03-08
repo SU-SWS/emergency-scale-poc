@@ -5,15 +5,19 @@ import Card from './Card';
 import { invalidateCardsCache } from "@/app/actions";
 
 // Define the card type
-type CardItem = {
+export type CardItem = {
   id: string
   title: string
   description: string
   date: string
 }
 
-const CardList = () => {
-  const [cards, setCards] = useState<CardItem[]>([])
+type CardListProps = {
+  data: CardItem[]
+}
+
+const CardList = ({ data }: CardListProps) => {
+  const [cards, setCards] = useState<CardItem[]>(data)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [newCardAdded, setNewCardAdded] = useState(false)

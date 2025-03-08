@@ -1,8 +1,9 @@
+import { CardItem } from "@/components/CardList";
 import { NextResponse } from "next/server";
 import Storyblok from "storyblok-js-client";
 
 export type Card = {
-  id: number;
+  id: string;
   uuid: string;
   content: {
     title: string;
@@ -14,7 +15,7 @@ export type Card = {
 
 let count = 0;
 
-const getCards = async () => {
+export const getCards = async (): Promise<CardItem[]> => {
 
   const StoryblokClient = new Storyblok({
     accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
