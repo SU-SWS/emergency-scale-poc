@@ -1,5 +1,5 @@
 import CardList from "@/components/CardList";
-import { getCards } from "./api/cards/route";
+import { getCards } from "@/app/api/cards/getCards";
 
 export const revalidate = 3600;
 

@@ -97,13 +97,9 @@ const CardList = ({ data }: CardListProps) => {
         </button>
       </div>
       <div className="grid grid-cols-1 gap-4 max-w-screen-md mx-auto">
-        {loading ? (
-          <div className="text-center">Loading...</div>
-        ) : (
-          cards.map((card) => (
+        {cards.map((card) => (
             <Card key={card.id} {...card} />
-          ))
-        )}
+        ))}
       </div>
     </>
   )
