@@ -18,3 +18,19 @@ export async function GET() {
   })
 }
 
+export async function POST() {
+  // Invalidate NextJS's the 'cards' cache tag
+  revalidateTag("cards");
+
+  // Invalidate Netlify's cache
+  await purgeCache({
+    tags: ['cards'],
+  });
+
+  return NextResponse.json({
+    revalidated: true,
+    message: "Cache invalidated successfully",
+    timestamp: new Date().toISOString(),
+  })
+}
+
