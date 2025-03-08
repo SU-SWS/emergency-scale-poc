@@ -1,9 +1,15 @@
 import { revalidateTag } from "next/cache"
 import { NextResponse } from "next/server"
+import { purgeCache } from "@netlify/functions";
 
 export async function POST() {
-  // Invalidate the 'cards' cache tag
-  revalidateTag("cards")
+  // Invalidate NextJS's the 'cards' cache tag
+  revalidateTag("cards");
+
+  // Invalidate Netlify's cache
+  await purgeCache({
+    tags: ['cards'],
+  });
 
   return NextResponse.json({
     revalidated: true,
