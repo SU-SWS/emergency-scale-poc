@@ -1,9 +1,11 @@
 import { CardItem } from "@/components/CardList";
+import { unstable_cache } from "next/cache";
 import Storyblok from "storyblok-js-client";
 
 export type Card = {
   id: string;
   uuid: string;
+  published_at: string;
   content: {
     title: string;
     description: string;
@@ -24,6 +26,7 @@ export const getCards = async (): Promise<CardItem[]> => {
     const data = await StoryblokClient.getAll("cdn/stories", {
       version: "published",
       starts_with: "cards/",
+      cv: Date.now(),
     });
 
     // Extract the relevant data from the Storyblok response
@@ -31,7 +34,7 @@ export const getCards = async (): Promise<CardItem[]> => {
       id: story.id,
       title: story.content.title,
       description: story.content.description,
-      date: story.content.date,
+      date: story.published_at,
       type: story.content.type,
     }));
 
@@ -41,3 +44,5 @@ export const getCards = async (): Promise<CardItem[]> => {
     return [];
   }
 }
+
+export const getCardsCached = unstable_cache(getCards, [], { tags: ["cards"] });

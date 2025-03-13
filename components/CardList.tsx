@@ -17,10 +17,9 @@ type CardListProps = {
 }
 
 const CardList = ({ data }: CardListProps) => {
-  const [cards, setCards] = useState<CardItem[]>(data)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [newCardAdded, setNewCardAdded] = useState(false)
+  const [cards, setCards] = useState<CardItem[]>(data);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Function to fetch cards from the API
   const fetchCards = async () => {
@@ -33,17 +32,6 @@ const CardList = ({ data }: CardListProps) => {
       }
 
       const data = await response.json()
-
-      console.log("Fetched cards:", data)
-      console.log("Current cards:", cards)
-
-      // Check if we have new cards
-      if (cards.length > 0 && data.length > cards.length) {
-        console.log("New card added!");
-        setNewCardAdded(true)
-        // Reset the notification after 3 seconds
-        setTimeout(() => setNewCardAdded(false), 3000)
-      }
 
       // Sort cards by date in reverse chronological order
       const sortedCards = data.sort(
@@ -67,13 +55,13 @@ const CardList = ({ data }: CardListProps) => {
   // Set up polling
   useEffect(() => {
     // Fetch cards immediately on mount
-    fetchCards()
+    fetchCards();
 
-    // Set up polling interval (every 5 seconds)
-    const intervalId = setInterval(fetchCards, 5000)
+    // Set up polling interval (every 3 seconds)
+    const intervalId = setInterval(fetchCards, 3000);
 
     // Clean up interval on unmount
-    return () => clearInterval(intervalId)
+    return () => clearInterval(intervalId);
   }, [])
 
   if (error) {
@@ -83,11 +71,6 @@ const CardList = ({ data }: CardListProps) => {
   return (
     <>
       <div className="grid grid-cols-1 gap-4 max-w-screen-md mx-auto">
-        {newCardAdded && (
-          <div className="bg-green-100 text-green-800 px-4 py-2 rounded-md shadow-md animate-pulse">
-            New card added!
-          </div>
-        )}
         <button
           onClick={refreshData}
           className="ml-auto bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md"

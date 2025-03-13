@@ -1,10 +1,9 @@
 import CardList from "@/components/CardList";
-import { getCards } from "@/app/api/cards/getCards";
-
-export const revalidate = 3600;
+import { getCardsCached } from "@/app/api/cards/getCards";
 
 export default async function Home() {
-  const cards = await getCards();
+  const cards = await getCardsCached();
+  console.log('Page got cards:', cards);
 
   return (
     <main className="container mx-auto py-8 px-4">
