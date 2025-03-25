@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    payload = await request.json();
+    payload = JSON.parse(payload as string);
     console.log('Request JSON:', payload);
   } catch (error) {
     console.error('Error parsing payload:', error);
