@@ -13,5 +13,12 @@ export async function POST(request: Request) {
     console.error('Error parsing payload:', error);
   }
 
+  try {
+    payload = await request.json();
+    console.log('Request JSON:', payload);
+  } catch (error) {
+    console.error('Error parsing payload:', error);
+  }
+
   return NextResponse.json({ status: 'ok' });
 }
