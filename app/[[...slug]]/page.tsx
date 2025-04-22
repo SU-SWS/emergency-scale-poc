@@ -15,7 +15,7 @@ export async function generateStaticParams(): Promise<PathsType[]> {
   const paths = [
     { slug: [''] }, // Home page
     { slug: ['resources'] }, // About page
-    { slug: ['test', 'sheas-test-page'] }, // Contact page
+    { slug: ['test', 'test-page'] }, // Two level test page
   ];
   return paths;
 }
