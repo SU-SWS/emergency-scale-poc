@@ -8,3 +8,17 @@ export async function invalidateCardsCache() {
   return { success: true, timestamp: new Date().toISOString() }
 }
 
+/**
+ *
+ * @returns { success: boolean, timestamp: string }
+ */
+export async function rebuild() {
+  const resp = await fetch(process.env.BUILD_URL!);
+  if (!resp.ok) {
+    console.error('Error rebuilding site:', resp.statusText);
+    return;
+  }
+  const data = await resp.json();
+  console.log('Rebuild response:', data);
+  return { success: true, timestamp: new Date().toISOString() }
+}
