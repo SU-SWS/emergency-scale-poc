@@ -9,11 +9,14 @@ export async function invalidateCardsCache() {
 }
 
 /**
- *
+ * Build the site using the Netlify build hook.
  * @returns { success: boolean, timestamp: string }
  */
 export async function rebuild() {
-  const resp = await fetch(process.env.BUILD_URL!);
+  const resp = await fetch(process.env.BUILD_URL!, {
+    method: 'POST',
+    body: JSON.stringify({}),
+  });
   if (!resp.ok) {
     console.error('Error rebuilding site:', resp.statusText);
     return;

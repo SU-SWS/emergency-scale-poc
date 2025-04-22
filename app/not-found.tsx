@@ -1,6 +1,6 @@
 'use client';
 import { rebuild } from './actions';
-export default async function NotFound() {
+export default function NotFound() {
   return (
     <main className="container mx-auto py-8 px-4 max-w-screen-lg">
       <h1 className="text-3xl font-bold mb-8 text-center">404 - Page Not Found</h1>
