@@ -7,9 +7,11 @@ export async function GET() {
   revalidateTag("cards");
 
   // Invalidate Netlify's cache
-  await purgeCache({
-    tags: ['cards'],
-  });
+  if (process.env.NETLIFY) {
+    await purgeCache({
+      tags: ['cards'],
+    });
+  }
 
   return NextResponse.json({
     revalidated: true,
@@ -26,9 +28,11 @@ export async function POST() {
   revalidatePath("/");
 
   // Invalidate Netlify's Durable cache
-  await purgeCache({
-    tags: ['cards'],
-  });
+  if (process.env.NETLIFY) {
+    await purgeCache({
+      tags: ['cards'],
+    });
+  }
 
   return NextResponse.json({
     revalidated: true,
